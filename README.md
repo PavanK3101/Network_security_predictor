@@ -80,5 +80,4 @@ The project focuses on:
 
 ---
 
-## 🏗️ Project Structure
 
