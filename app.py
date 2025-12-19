@@ -33,7 +33,7 @@ def add_bg_animation():
         }
 
         /* Making text more readable against dark background */
-        h1, h2, h3, p, label, button p {
+        h1, h2, h3, h4, p, label, button p {
             color: #ffffff !important;
         }
 
@@ -153,4 +153,5 @@ if st.button("🔍 SCAN NETWORK FOR ANOMALIES !!"):
     else:
         st.success(f"✅ **System Operating Normally**")
         st.metric(label="Risk Level", value="LOW", delta=f"{result:.1f}% Probability", delta_color="inverse")
+
 
