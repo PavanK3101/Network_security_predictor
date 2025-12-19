@@ -7,7 +7,7 @@ import numpy as np
 
 
 
-st.set_page_config(page_title="Security Predictor", page_icon="🚨")
+st.set_page_config(page_title="Security Predictor", page_icon="🚨", layout = "wide")
 
 # 2. Animated Background CSS
 def add_bg_animation():
@@ -15,6 +15,10 @@ def add_bg_animation():
         """
         <style>
         /* This targets the main container */
+        [data-testid="stHeadingWithActionElements"] {
+            color : #ffffff;
+        }
+
         [data-testid="stAppViewContainer"] {
             background: linear-gradient(132deg, #0f1739, #055eba, #00c7fa);
             background-size: 400% 400%;
@@ -76,20 +80,38 @@ st.write("Companies need ML that can flag intrusions, DDoS, and abnormal loads; 
 
 st.subheader("📊 System Metrics")
 
-pct_size = st.number_input("Enter PacketSize")
-trans_rate = st.number_input("Enter Transmission Rate:")
-lat = st.number_input("Enter Latency:")
-prot = st.number_input("Enter Protocol Type:")
-active = st.number_input("Enter number of Active Connections:")
-cpu = st.number_input("CPU Usage:")
-mem = st.number_input("Memory Usage:")
-band = st.number_input("Enter Bandwidth:")
-res = st.number_input("Enter Response Time:")
-auth_fail = st.number_input("Enter number of auth fails:")
-acc = st.number_input("Enter number of access violations:")
-fire = st.number_input("Enter number of Firewall Blocks:")
-ids = st.number_input("Enter number of Alerts:")
-dwt = st.number_input("Enter frequency(DWT):")
+st.markdown('---')
+
+# Creating 4 columns for a compact, technical view
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.markdown("#### 📡 Traffic")
+    p_size = st.number_input("Enter Packet Size", value=500.0, step=1.0)
+    t_rate = st.number_input("Enter Transmission Rate", value=50.0)
+    lat = st.number_input("Enter Latency", value=20.0)
+    prot = st.selectbox("Enter Protocol Type", options=[0, 1, 2, 3])
+
+with col2:
+    st.markdown("#### ⚡ Hardware")
+    cpu = st.number_input("Enter CPU %", value=15.0, max_value=100000.0)
+    mem = st.number_input("Enter Mem %", value=30.0, max_value=100000.0)
+    active = st.number_input("Enter number of Active Connections", value=10, step=1)
+    band = st.number_input("Enter Bandwidth", value=100.0)
+
+with col3:
+    st.markdown("#### 🛡️ Security")
+    # Setting this to exactly 9 as per your request to see the effect
+    auth_fail = st.number_input("Enter number of auth fails", value=9, step=1)
+    acc_viol = st.number_input("Enter number of access violations", value=0, step=1)
+    f_blocks = st.number_input("Enter number of Firewall Blocks", value=0, step=1)
+    ids_alt = st.number_input("Enter number of IDS Alerts", value=0, step=1)
+
+with col4:
+    st.markdown("#### ⏱️ Other")
+    res_time = st.number_input("Enter Response Time", value=0.01)
+    dwt = st.number_input("Enter frequency(DWT)", value=0.0)
+
 
 st.markdown("---")
 
@@ -102,19 +124,19 @@ if st.button("🔍 SCAN NETWORK FOR ANOMALIES !!"):
 
     input_df = pd.DataFrame([
         {
-            'Packet_Size': pct_size,
-            'Transmission_Rate': trans_rate,
+            'Packet_Size': p_size,
+            'Transmission_Rate': t_rate,
             'Latency': lat,
             'Protocol_Type': prot,
             'Active_Connections':active,
             'CPU_Usage': cpu,
             'Memory_Usage': mem, 
             'Bandwidth_Utilization': band,
-            'Request_Response_Time': res,
+            'Request_Response_Time': res_time,
             'Auth_Failures': auth_fail,
-            'Access_Violations': acc,
-            'Firewall_Blocks': fire,
-            'IDS_Alerts': ids,
+            'Access_Violations': acc_viol,
+            'Firewall_Blocks': f_blocks,
+            'IDS_Alerts': ids_alt,
             'DWT_Feature_1': dwt
         }
     ])
