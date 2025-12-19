@@ -16,7 +16,7 @@ def add_bg_animation():
         <style>
         /* This targets the main container */
         [data-testid="stHeadingWithActionElements"] {
-            color : #ffffff;
+            color : #ffffff !important;
         }
 
         [data-testid="stAppViewContainer"] {
@@ -153,3 +153,4 @@ if st.button("🔍 SCAN NETWORK FOR ANOMALIES !!"):
     else:
         st.success(f"✅ **System Operating Normally**")
         st.metric(label="Risk Level", value="LOW", delta=f"{result:.1f}% Probability", delta_color="inverse")
+
