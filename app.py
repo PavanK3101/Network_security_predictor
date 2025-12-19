@@ -20,9 +20,10 @@ def add_bg_animation():
         }
 
         [data-testid="stAppViewContainer"] {
-            background: linear-gradient(132deg, #0f1739, #055eba, #00c7fa);
-            background-size: 400% 400%;
-            animation: GradientAnimation 15s ease infinite;
+            background-image: linear-gradient(to right bottom, #0f1739, #00c7fa);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            margin:0;
         }
 
         /* The animation movement */
@@ -153,5 +154,6 @@ if st.button("🔍 SCAN NETWORK FOR ANOMALIES !!"):
     else:
         st.success(f"✅ **System Operating Normally**")
         st.metric(label="Risk Level", value="LOW", delta=f"{result:.1f}% Probability", delta_color="inverse")
+
 
 
